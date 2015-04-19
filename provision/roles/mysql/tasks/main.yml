@@ -1,0 +1,12 @@
+---
+- name: Add MySQL yum repository
+  yum: name="http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm"
+
+- name: Install MySQL
+  yum: name={{ item }} state=present
+  with_items:
+    - mysql-community-client
+    - mysql-community-server
+
+- name: Start and Enable MySQL
+  service: name=mysqld state=started enabled=yes

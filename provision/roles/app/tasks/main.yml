@@ -1,0 +1,37 @@
+---
+- name: Install base packages
+  yum: name={{ item }}
+  with_items:
+    - git
+    - vim
+
+- name: Stop an Disabled iptables
+  service: name=iptables state=stopped enabled=no
+
+- name: Install ntp
+  yum: name=ntp state=present
+
+- name: Start and Enable ntpd
+  service: name=ntpd state=started enabled=yes
+
+- name: Remove default localtime
+  file: path=/etc/localtime state=absent
+
+- name: Make localtime symlink to JST
+  file: src=/usr/share/zoneinfo/Asia/Tokyo dest=/etc/localtime state=link mode=0644
+
+- name: Copy custom php.ini
+  copy: src=php/zz-app.ini dest=/etc/php.d/zz-app.ini
+
+- name: Copy custom php-fpm.conf
+  copy: src=php-fpm/zz-app.conf dest=/etc/php-fpm.d/zz-app.conf
+
+- name: Copy custom nginx.conf
+  copy: src=nginx/app.conf dest=/etc/nginx/conf.d/app.conf
+
+- name: Restart Middleware
+  service: name={{ item }} state=restarted
+  with_items:
+    - mysqld
+    - nginx
+    - php-fpm

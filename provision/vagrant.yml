@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  sudo: yes
+  roles:
+    - app
+    - composer
+    - memcached
+    - mysql
+    - nginx
+    - php
