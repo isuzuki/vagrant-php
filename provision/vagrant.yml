@@ -7,4 +7,5 @@
     - memcached
     - mysql
     - nginx
+    - nodejs
     - php
