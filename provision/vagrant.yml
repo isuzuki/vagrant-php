@@ -4,6 +4,7 @@
   roles:
     - app
     - composer
+    - laravel
     - memcached
     - mysql
     - nginx
