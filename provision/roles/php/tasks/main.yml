@@ -13,8 +13,9 @@
     - php-common
     - php-pdo
     - php-fpm
-    - php-mcrypt
     - php-mbstring
+    - php-mcrypt
+    - php-mysql
     - php-opcache
     - php-pecl-memcache
     - php-xml

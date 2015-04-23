@@ -5,6 +5,7 @@
 - name: Install MySQL
   yum: name={{ item }} state=present
   with_items:
+    - MySQL-python
     - mysql-community-client
     - mysql-community-server
 

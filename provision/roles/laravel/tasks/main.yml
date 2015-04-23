@@ -1,0 +1,17 @@
+---
+- name: Create MySQL Database
+  mysql_db: name={{ item }} state=present encoding=utf8
+  with_items:
+    - laravel_app
+    - laravel_app_test
+
+- name: Copy Laravel nginx.conf
+  copy: src=nginx/laravel.conf dest=/etc/nginx/conf.d/laravel.conf
+  notify:
+    Restart nginx
+
+- name: Execute php artisan migrate
+  shell: php artisan migrate chdir=/vagrant/src/laravel-app
+
+- name: Execute php artisan db:seed
+  shell: php artisan db:seed chdir=/vagrant/src/laravel-app
