@@ -5,6 +5,7 @@
     - app
     - composer
     - gulp
+    - laravel
     - memcached
     - mysql
     - nginx

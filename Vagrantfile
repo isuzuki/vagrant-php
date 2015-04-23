@@ -20,6 +20,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.network "private_network", ip: "192.168.33.10"
 
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
+
   config.vm.provision "shell", inline: provision
   config.vm.provision "shell", inline: script
   config.vm.synced_folder "./", "/vagrant", id: "vagrant", :nfs => false, :mount_options => ["dmode=777","fmode=666"]
